@@ -1,0 +1,62 @@
+## Extra feature - Home work
+
+1. setup bull dashboard/UI  ---> ✅done
+2. setup logging using winston and store on mongoDB or cosmosDB
+_________________________________________________________________
+
+
+
+
+## BullMQ is a high-level job queue framework that uses Redis internally, just like an ORM uses MySQL under the hood to simplify complex operations.
+
+## BullMQ cannot work without Redis
+## BullMQ stores jobs, states, retries, and delays inside Redis.
+  👉 Redis is the core engine BullMQ depends on.
+
+## Redis can work without BullMQ
+## Redis is a general-purpose data store (cache, pub/sub, streams, locks).
+  👉 BullMQ is just one possible use case built on top of Redis.
+__________________________________________________________________________
+
+
+
+
+
+
+## Integration Testing  --> Test multiple modules working together (You test how two or more parts work together.)
+-----------------------
+                            e.g., (Controller + Route + Service) (but with mock DB)
+
+
+Note: You move from small → bigger tests only when the smaller parts are working correctly.
+
+  - You should always finish Unit Testing first,
+  - then move to Integration Testing,
+  - and finally, if needed, End-to-End (E2E) Testing.
+
+
+
+
+
+
+## Unit Testing
+----------------
+
+
+1. what is unit testing?
+2. why do we need it?
+3. Unit testing Tool --> Jest
+4. Demo of jest (syntax)
+5. ExecHub - Integrate Jest on (Controller layer)
+
+
+  -  Unit testing => Try to test the code by going at the smallest units.
+  -  Hit Api => (req) goes from routes -> controller -> service -> repository -> DB.
+
+controller
+
+   > ping()
+   > addProblem()
+   > getProblem()
+
+
