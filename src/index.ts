@@ -1,4 +1,5 @@
 import express, { Express, Request, Response } from "express";
+import bodyParser from "body-parser";
 
 import serverConfig from "./config/server.config.js";
 import apiRouter from "./routes/index.js";
@@ -9,7 +10,9 @@ import bullBoardAdapter from "./config/bullboard.config.js";
 const app: Express = express();
 const { PORT } = serverConfig;
 
-app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(bodyParser.text());
 app.use("/api", apiRouter);
 app.use("/admin/bull-board", bullBoardAdapter.getRouter());
 

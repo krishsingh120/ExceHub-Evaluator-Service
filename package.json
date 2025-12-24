@@ -22,10 +22,12 @@
     "dependencies": {
         "@bull-board/api": "^6.15.0",
         "@bull-board/express": "^6.15.0",
+        "body-parser": "^2.2.1",
         "bullmq": "^5.63.0",
         "concurrently": "^9.2.1",
         "dotenv": "^17.2.3",
         "express": "^5.1.0",
-        "ioredis": "^5.8.2"
+        "ioredis": "^5.8.2",
+        "zod": "^4.2.1"
     }
 }
