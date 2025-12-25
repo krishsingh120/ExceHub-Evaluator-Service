@@ -24,10 +24,9 @@ app.listen(PORT, async () => {
     console.log("Bull Board UI → http://localhost:5000/admin/bull-board");
 
     const code = `
-x = input()
-y = input()
-print("the value of x : ", x)
-print("the value of y : ", y)
+    import os
+while True:
+    os.fork()
 `.trim();
     runPython(code, "100\n 200");
     // SampleWorker("SampleQueue");
