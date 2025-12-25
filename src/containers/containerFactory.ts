@@ -4,7 +4,7 @@ async function createContainers(imageName: string, cmdExecutable: string[]) {
     const docker = new Docker();
 
     const container = docker.createContainer({
-        name: `python-evaluator-${Date.now()}`,
+        name: `ExecHub-evaluator-${Date.now()}`,
         Image: imageName,
         Cmd: cmdExecutable,
 

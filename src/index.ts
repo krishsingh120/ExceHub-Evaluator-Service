@@ -2,6 +2,8 @@ import express, { Express, Request, Response } from "express";
 import bodyParser from "body-parser";
 
 import apiRouter from "./routes/index.js";
+import runCpp from "./containers/runCppDocker.js";
+import runJava from "./containers/runJavaDocker.js";
 import serverConfig from "./config/server.config.js";
 import SampleWorker from "./workers/SampleWorker.js";
 import runPython from "./containers/runPythonDocker.js";
@@ -24,11 +26,26 @@ app.listen(PORT, async () => {
     console.log("Bull Board UI → http://localhost:5000/admin/bull-board");
 
     const code = `
-    import os
-while True:
-    os.fork()
-`.trim();
-    runPython(code, "100\n 200");
+    #include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    int x;
+    cin >> x;
+    cout << "Value of x is : " << x << endl;
+
+    for(int i = 0; i <= x; i++){
+       cout << i << endl;
+    }
+    return 0;
+}
+
+    `.trim();
+
+    // runPython(code, "100")
+    // runJava(code, "10");
+    runCpp(code, "10");
+
     // SampleWorker("SampleQueue");
 
     // SampleProducer(
