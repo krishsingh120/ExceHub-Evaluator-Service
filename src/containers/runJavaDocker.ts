@@ -40,19 +40,20 @@ async function runJava(code: string, inputTestCase: string) {
         rawLogBuffer.push(chunk);
     });
 
-    await new Promise((res) => {
+    const response = await new Promise((res) => {
         loggerStream.on("end", () => {
             console.log(rawLogBuffer);
             const completeBuffer = Buffer.concat(rawLogBuffer);
             const decodedStream = decodeDockerStream(completeBuffer);
             console.log(decodedStream);
             console.log(decodedStream.stdout);
-            res(decodeDockerStream);
+            res(decodedStream);
         });
     });
 
     // remove the container when done with it.
     await javaDockerContainer.remove();
+    return response;
 }
 
 export default runJava;
