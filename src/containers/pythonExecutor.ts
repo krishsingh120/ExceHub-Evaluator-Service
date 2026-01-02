@@ -4,13 +4,18 @@ import createPythonContainer from "./containerFactory.js";
 import { PYTHON_IMAGE } from "../utils/constants.js";
 import decodeDockerStream, { escapeForShell } from "./dockerHelper.js";
 import pullImage from "./pullImage.js";
-import CodeExecutorStrategy, { ExecutionResponse } from "../types/CodeExecutorStrategy.js";
-
+import CodeExecutorStrategy, { ExecutionResponse } from "../types/codeExecutorStrategy.js";
 
 // Migration Done.
 class PythonExecutor implements CodeExecutorStrategy {
-    async execute(code: string, inputTestCase: string): Promise<ExecutionResponse> {
+    async execute(
+        code: string,
+        inputTestCase: string,
+        outputTestCase: string,
+    ): Promise<ExecutionResponse> {
         console.log(`Initializing python docker container`);
+
+        // console.log(code, inputTestCase, outputTestCase);
 
         await pullImage(PYTHON_IMAGE);
 
@@ -43,7 +48,6 @@ class PythonExecutor implements CodeExecutorStrategy {
         loggerStream.on("data", (chunk) => {
             rawLogBuffer.push(chunk);
         });
-
 
         try {
             const codeResponse: string = await this.fetchDecodedStream(loggerStream, rawLogBuffer);

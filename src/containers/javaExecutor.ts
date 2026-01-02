@@ -4,11 +4,17 @@ import createJavaContainer from "./containerFactory.js";
 import { JAVA_IMAGE } from "../utils/constants.js";
 import decodeDockerStream, { escapeForShell } from "./dockerHelper.js";
 import pullImage from "./pullImage.js";
-import CodeExecutorStrategy, { ExecutionResponse } from "../types/CodeExecutorStrategy.js";
+import CodeExecutorStrategy, { ExecutionResponse } from "../types/codeExecutorStrategy.js";
 
 class JavaExecutor implements CodeExecutorStrategy {
-    async execute(code: string, inputTestCase: string): Promise<ExecutionResponse> {
+    async execute(
+        code: string,
+        inputTestCase: string,
+        outputTestCase: string,
+    ): Promise<ExecutionResponse> {
         console.log(`Initializing java docker container`);
+
+        // console.log(code, inputTestCase, outputTestCase);
 
         await pullImage(JAVA_IMAGE);
 

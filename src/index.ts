@@ -26,7 +26,7 @@ app.use("/admin/bull-board", bullBoardAdapter.getRouter());
 // server listening
 app.listen(PORT, async () => {
     console.log(`Server is listening on port: http://localhost:${PORT}`);
-    console.log("Bull Board UI → http://localhost:5000/admin/bull-board");
+    console.log(`Bull Board UI → http://localhost:${PORT}/admin/bull-board`);
 
     // const code = `
     // #include <bits/stdc++.h>
@@ -49,8 +49,8 @@ app.listen(PORT, async () => {
 
     // runCpp(code, inputCase);
 
-    // SampleWorker(SAMPLE_QUEUE);
-    // SubmissionWorker(SUBMISSION_QUEUE);
+    SampleWorker(SAMPLE_QUEUE);
+    SubmissionWorker(SUBMISSION_QUEUE);
 
     // submissionQueueProducer({"1234": {
     //     language: "CPP",
