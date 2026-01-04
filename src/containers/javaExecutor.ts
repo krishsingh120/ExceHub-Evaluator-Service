@@ -50,8 +50,18 @@ class JavaExecutor implements CodeExecutorStrategy {
 
         try {
             const codeResponse: string = await this.fetchDecodedStream(loggerStream, rawLogBuffer);
-            return { output: codeResponse, status: "COMPLETED" };
+
+            if (codeResponse.toString().trim() === outputTestCase.toString().trim()) {
+                console.log("output is matched: ", codeResponse);
+                return { output: codeResponse, status: "SUCCESS" };
+            } else {
+                return { output: codeResponse, status: "WA" };
+            }
         } catch (error) {
+            console.log("Error occurred", error);
+            if (error === "TLE") {
+                await javaDockerContainer.kill();
+            }
             return { output: error as string, status: "ERROR" };
         } finally {
             // remove the container when done with it.
@@ -63,8 +73,8 @@ class JavaExecutor implements CodeExecutorStrategy {
         loggerStream: NodeJS.ReadableStream,
         rawLogBuffer: Buffer[],
     ): Promise<string> {
-        // TODO: cleanup repisitive fetchDecodedStream
-        // TODO: May be moved to the docker helper util'
+        // TODO: cleanup repitative fetchDecodedStream.
+        // TODO: May be moved to the docker helper util.
 
         return new Promise((res, rej) => {
             const timeout = setTimeout(() => {
